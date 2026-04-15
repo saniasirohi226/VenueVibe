@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ── Project coordinates ───────────────────────────────────────────── -->
+    <groupId>com.moodrecommender</groupId>
+    <artifactId>mood-recommender-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Mood Recommender API</name>
+    <description>Spring Boot 3 backend for the Mood-Based Nearby Places Recommender</description>
+
+    <!-- ── Spring Boot parent (manages all dependency versions) ─────────── -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <!-- ── Java version ──────────────────────────────────────────────────── -->
+    <properties>
+        <java.version>17</java.version>
+        <!-- Lombok must match the compiler release to avoid annotation-processor issues -->
+        <lombok.version>1.18.32</lombok.version>
+    </properties>
+
+    <!-- ── Dependencies ──────────────────────────────────────────────────── -->
+    <dependencies>
+
+        <!-- Spring Web: @RestController, @RequestBody, CORS, embedded Tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Validation: @Valid, @NotNull, @NotBlank, @DecimalMin / @DecimalMax -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Lombok: @Data, @Builder, @AllArgsConstructor, @NoArgsConstructor, @Slf4j -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <!-- provided: compile-time only; not included in the final JAR -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ── Test scope ────────────────────────────────────────────────── -->
+
+        <!-- JUnit 5, Mockito, MockMvc, AssertJ — all via the starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- ── Build ─────────────────────────────────────────────────────────── -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- Exclude Lombok from the packaged JAR (it's compile-time only) -->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Explicit compiler config: required for Lombok + records on Java 17 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

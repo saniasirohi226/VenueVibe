@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+dist/
+build/
+.npm/
+
+# Java / Maven / Gradle
+target/
+*.class
+*.jar
+*.war
+*.ear
+bin/
+.gradle/
+build/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+*.classpath
+*.project
+*.settings/
+
+# Misc
+.DS_Store
+*.log

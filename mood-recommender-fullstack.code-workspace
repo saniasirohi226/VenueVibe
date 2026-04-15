@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "Frontend (React)",
+      "path": "mood-recommender"
+    },
+    {
+      "name": "Backend (Spring Boot)",
+      "path": "backend"
+    }
+  ],
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic"
+  }
+}
